@@ -128,7 +128,7 @@
             header('Location: ../front/regiter.html?error:pwdconfirm');
             exit();
         }
-
+ 
         $sql = "SELECT contact FROM user";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
