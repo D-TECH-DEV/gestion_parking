@@ -13,28 +13,51 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-      .card {
-        transition: transform 0.2s;
-      } 
-    
-      .card:hover {
-        transform: scale(1.02);
-      }
+        body {
+            background-color: #f8f9fa;
+        }
 
-      
-      .table-container {
-        max-height: 400px; 
-        overflow-y: auto; 
-        position: relative;
-      }
+        .navbar {
+            background-color: #198754 !important;
+        }
 
-      
-      .table-container thead th {
-        position: sticky;
-        top: 0;
-        background-color: #198754; 
-        z-index: 1; 
-      }
+        .card {
+            transition: transform 0.3s ease-in-out;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .profile-card {
+            background: linear-gradient(135deg, #198754, #145a32);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .table thead th {
+            position: sticky;
+            top: 0;
+            background-color: #198754;
+            color: white;
+            z-index: 1;
+        }
+
+        .auther .card {
+          background: linear-gradient(135deg, #198754, #145a32);
+
+        }
     </style>
   </head>
   <body>
@@ -62,7 +85,7 @@
     <div class="container-fluid ">
       <div class="row">
         
-        <div class="col-lg-4">
+        <div class="col-lg-4 ">
           <div class="card shadow-sm">
             <div class="card-body text-center">
               <img src="../images/img-prof.png" alt="Profile Image" class="img-fluid rounded-circle mb-3" style="width: 40%;">
@@ -75,9 +98,7 @@
               <button class="btn btn-outline-success w-100 mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-parking"></i> Stationnement</button>
               <button class="btn btn-outline-success w-100 mb-2" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"><i class="bi bi-sign-stop"></i> Déstationnement</button>
               <hr>
-              <form action="../back/function.php" method="post">
-                <button type="submit" name="modifyUser" class="btn btn-outline-primary w-100 mb-2" data-bs-toggle="modal" data-bs-target="#userModify"><i class="bi bi-person-lines-fill"></i> Modifier profil</button>
-              </form>
+                <a href="editerUser.php" name="modifyUser" class="btn btn-outline-primary w-100 mb-2"><i class="bi bi-person-lines-fill"></i> Modifier profil</a>
               <button  class="btn btn-outline-primary w-100 mb-2" data-bs-target="#chagepassword" data-bs-toggle="modal"><i class="bi bi-key-fill"></i> Changer mot de passe</button>
               <hr>
               <form method="post" action="../back/function.php">

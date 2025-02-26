@@ -19,7 +19,7 @@
         $color = $_POST['color'];
         $matri = $_POST['matricule'];
         $posit = $_POST['position'];
-        $statut = 'stationné';
+        $statut = 'Stationnée';
         $sql = 'INSERT INTO autos (proprio, marque, serie, couleur, matricule, statut) VALUES (?, ?, ?, ?, ?, ?)';
         $stmt = $conn->prepare($sql); 
        
@@ -65,6 +65,8 @@
 
                 $_SESSION['user_id'] = $result['id'];
                 $_SESSION['user_name'] = $result['name'];
+                $_SESSION['user_contact'] = $result['contact'];
+                $_SESSION['user_email'] = $result['email'];
         
                 header('Location: ../front/index.php');
                 exit();
@@ -84,57 +86,55 @@
         header('Location: ../front/connexion.html');
     }
     
-    if(isset($_POST['register-submit'])) {
+    if (isset($_POST['register-submit'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $num = $_POST['contact'];
         $pwd = $_POST['password'];
         $pwdConfirm = $_POST['password_confirmation'];
-
+    
         if ($pwd !== $pwdConfirm) {
-            header('Location: ../front/regiter.html?error:pwdconfirm');
+            header('Location: ../front/register.html?error:pwdconfirm');
             exit();
         }
-
-        $sql = "SELECT contact FROM user";
+    
+        $sql = "SELECT contact FROM user WHERE contact = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if($result === $num) {
-            header('Location: ../front/regiter.html?error:contactalredyexit');
+        $stmt->execute([$num]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result) {
+            header('Location: ../front/register.html?error:contactalreadyexists');
             exit();
         }
-
+    
         $sql = "INSERT INTO user(name, contact, email, password) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$name, $num, $email, password_hash($pwd, PASSWORD_DEFAULT)]);
-
-        if($stmt) {
+    
+        if ($stmt) {
             header('Location: ../front/connexion.html');
         }
-
     }
+    
 
     if(isset($_POST['editerUser-submit'])) {
        
         $name = $_POST['name'];
         $email = $_POST['email'];
         $num = $_POST['contact'];
-        $pwd = $_POST['password'];
-        $pwdConfirm = $_POST['password_confirmation'];
 
-        if ($pwd !== $pwdConfirm) {
-            header('Location: ../front/regiter.html?error:pwdconfirm');
-            exit();
-        }
  
         $sql = "SELECT contact FROM user";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if($result === $num) {
+        if($result['contact'] === $num) {
+            header('Location: ../front/regiter.html?error:contactalredyexit');
+            exit();
+        }
+        if($result['email'] === $email) {
             header('Location: ../front/regiter.html?error:contactalredyexit');
             exit();
         }
@@ -144,31 +144,33 @@
         $stmt->execute([$name, $num, $email, $_SESSION['user_id']]);
         if($stmt) {
             $_SESSION['user_name'] = $name;
+            $_SESSION['user_contact'] = $num;
+            $_SESSION['user_email'] = $email;
             header('Location: ../front/index.php');
         }
 
     }
 
-    if (isset($_POST['modifyUser']) ) {
+    // if (isset($_POST['modifyUser']) ) {
         
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $num = $_POST['contact'];
+    //     $name = $_POST['name'];
+    //     $email = $_POST['email'];
+    //     $num = $_POST['contact'];
 
-        $sql = "SELECT * FROM user WHERE id=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$_SESSION['user_id']]);
-        $result= $stmt->fetch(PDO::FETCH_ASSOC);
+    //     $sql = "SELECT * FROM user WHERE id=?";
+    //     $stmt = $conn->prepare($sql);
+    //     $stmt->execute([$_SESSION['user_id']]);
+    //     $result= $stmt->fetch(PDO::FETCH_ASSOC);
        
-        if ($result) {
+    //     if ($result) {
             
-            $_SESSION['edit_name'] = $result['name'];
-            $_SESSION['edit_email'] = $result['email'];
-            $_SESSION['edit_contact'] = $result['contact'];
+    //         $_SESSION['edit_name'] = $result['name'];
+    //         $_SESSION['edit_email'] = $result['email'];
+    //         $_SESSION['edit_contact'] = $result['contact'];
 
-        }
-        header('Location: ../front/editerUser.php');
-    }
+    //     }
+    //     header('Location: ../front/editerUser.php');
+    // }
     
     if (false){
         $oldpwd = $_POST[''];
