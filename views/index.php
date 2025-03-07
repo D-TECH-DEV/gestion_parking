@@ -1,5 +1,10 @@
 <?php
-    require '../back/function.php';
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+    require '../controllers/function.php';
+    if (!isset($_SESSION['user_id'])){
+      header ('Location: login.html');
+    }
 ?>
 
 <!doctype html>
@@ -71,7 +76,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
+              <a class="nav-link active" aria-current="page" href="#">Accueil</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
@@ -88,7 +93,7 @@
         <div class="col-lg-4 ">
           <div class="card shadow-sm">
             <div class="card-body text-center">
-              <img src="../images/img-prof.png" alt="Profile Image" class="img-fluid rounded-circle mb-3" style="width: 40%;">
+              <img src="../asset/images/img-prof.png" alt="Profile Image" class="img-fluid rounded-circle mb-3" style="width: 40%;">
               <h3>
                 <?php
                   echo $_SESSION['user_name']
@@ -101,7 +106,8 @@
                 <a href="editerUser.php" name="modifyUser" class="btn btn-outline-primary w-100 mb-2"><i class="bi bi-person-lines-fill"></i> Modifier profil</a>
               <button  class="btn btn-outline-primary w-100 mb-2" data-bs-target="#chagepassword" data-bs-toggle="modal"><i class="bi bi-key-fill"></i> Changer mot de passe</button>
               <hr>
-              <form method="post" action="../back/function.php">
+              <!-- <form method="post" action="../controllers/function.php"> -->
+              <form method="post" action="../controllers/usersControllers/logoutController.php">
                 <button name="deconnexion-submit" class="btn btn-outline-danger w-100"><i class="bi bi-box-arrow-left"></i> Deconnexion</button>
               </form>
             </div>
@@ -170,15 +176,21 @@
               </thead>
               <tbody id="tbody">
               <?php
-                   echo $table
+                   echo $_SESSION['table'];
                 ?>
               </tbody>
             </table>
           </div>
           <div class="text-end">
-            <a href="listAll.php" name="submit-listAll" class="btn btn-outline-success" >
+            <!-- <a href="listAll.php" name="submit-listAll" class="btn btn-outline-success" >
               Afficher tout
-            </a>
+            </a> -->
+
+           <form action="../controllers/function.php" method="post">
+            <button  name="submit-listAll" class="btn btn-outline-success" >
+                Afficher touts
+              </button>
+           </form>
           </div>
         </div>
       </div>
@@ -194,7 +206,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body text-center">
-            <form method="post" action="../back/function.php" class="row g-3">
+            <form method="post" action="../controllers/function.php" class="row g-3">
               <div class="col-md-12">
                 <label for="validationDefault01" class="form-label">Propriétaire</label>
                 <input type="text" class="form-control" id="validationDefault01" name="propriétaire" required>
@@ -241,7 +253,7 @@
     <div>
       <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-          <form action="../back/function.php" method="post" class="modal-content">
+          <form action="../controllers/function.php" method="post" class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Déstationnement</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -264,7 +276,7 @@
     <div>
       <div class="modal fade" id="chagepassword" aria-hidden="true" aria-labelledby="chagepasswordLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-          <form action="../back/function.php" method="post" class="modal-content">
+          <form action="../controllers/function.php" method="post" class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="chagepasswordLabel">Changer mot de passe</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

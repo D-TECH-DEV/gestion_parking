@@ -1,9 +1,12 @@
 
 <?php
-    require_once '../back/function.php';
-    //$result = listStation ($conn);    
-?>
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
+    //session_start();
+   
+    require_once '../controllers/function.php';  
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +38,7 @@
   <div class="container-fluid ">
    
       <div class="text-center">
-      <form action="../back/function.php" method="post">
+      <form action="../controllers/function.php" method="post">
         <ul class="nav nav-pills justify-content-center ">
                 <li class="nav-item m-2">
                   <button type="submit" class="btn btn-outline-success"  name="triTous">Tous</button>
@@ -63,9 +66,9 @@
             </tr>
           </thead>
           <tbody id="tbody">
-            <?php
-              echo $tableTri
-            ?>
+          <?php
+          echo $_SESSION['table'];
+?>
           </tbody>
           </table>
   </div>

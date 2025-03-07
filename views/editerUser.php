@@ -1,5 +1,7 @@
 <?php
-    require_once '../back/function.php'
+ ini_set('display_errors', 1);
+ error_reporting(E_ALL);
+    require_once '../controllers/function.php'
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +40,7 @@
                     <div class="card-body">
                         <h3 class="text-center text-success mb-4">Edition</h3>
                         
-                        <form method="post" action="../back/function.php" class="text-start" >
+                        <form method="post" action="../controllers/function.php" class="text-start" >
                         <div class="form-group mb-1">
                             <label for="name" class="form-label">Nom</label>
                             <?php
