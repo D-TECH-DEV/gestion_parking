@@ -11,18 +11,6 @@
 
     $_SESSION['table'] = listStation ($conn);
     $nbre = getNbre($conn);
-
-
-    if (isset($_POST['deconnexion-submit'])) {
-        $user = new User('you', 'doum@gmail.com', 'O4768435', 'Azerty');
-        $user->logoutUser();      
-    } //ok
-
-
-
-
-
-
     
 
     if (isset($_POST['submit-listAll'])){
@@ -46,12 +34,12 @@
     
     
 
-    if (isset($_POST['connexion-submit'])) {
+    // if (isset($_POST['connexion-submit'])) {
 
-        $user =  new User ('', '', $_POST['contact'], $_POST['password']);
-        $user->loginUser ($conn);
+    //     $user =  new User ('', '', $_POST['contact'], $_POST['password']);
+    //     $user->loginUser ($conn);
         
-    } //ok
+    // } //ok
 
    
     

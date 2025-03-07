@@ -1,7 +1,8 @@
 <?php
  ini_set('display_errors', 1);
  error_reporting(E_ALL);
-    require_once '../controllers/function.php'
+    //require_once '../controllers/function.php'
+    session_start();
 ?>
 
 <!DOCTYPE html>

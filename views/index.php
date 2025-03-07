@@ -1,10 +1,19 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-    require '../controllers/function.php';
-    if (!isset($_SESSION['user_id'])){
-      header ('Location: login.html');
-    }
+  ini_set('display_errors', 1);
+  error_reporting(E_ALL);
+
+  session_start();
+
+    //require '../controllers/function.php';
+    
+    // if (!isset($_SESSION['user_id'])){
+    //   header ('Location: login.html');
+    // }
+
+    
+    // var_dump ($_SESSION['user_name']);
+    // die();
+    //require '../controllers/usersControllers/loginController.php';
 ?>
 
 <!doctype html>

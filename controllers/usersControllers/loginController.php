@@ -3,7 +3,7 @@
 
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
-
+    session_start();
     require_once '../../_config/autoload.php';
     require_once '../../_config/connexion.php';
 
@@ -13,11 +13,12 @@
 
     if ($result) {
         if ( password_verify($user->getPassword(), $result['password'])){
-
+            session_start();
             $_SESSION['user_id'] = $result['id'];
             $_SESSION['user_name'] = $result['name'];
             $_SESSION['user_contact'] = $result['contact'];
             $_SESSION['user_email'] = $result['email'];
+
             header('Location: ../../views/index.php');
             exit();
         }else {

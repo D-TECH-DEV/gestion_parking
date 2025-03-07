@@ -9,9 +9,8 @@
 
     if (!$conn) {
         die ($conn->errorInfo());
-    } else {
+        
+    } 
 
-        header ('Location ../front/index.html');
-    }
    
 ?>

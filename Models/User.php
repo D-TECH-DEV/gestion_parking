@@ -56,29 +56,15 @@
         public function selectUser($conn) {
             $sql = 'SELECT * FROM user WHERE contact = ?';
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$this->getNumero()]);
-            $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+            $stmt->execute([$this->numero]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            // var_dump($result);
+            // die(); 
            return $result; 
             
         }
 
         public function editeUser($conn) {
-            $sql = "SELECT * FROM user WHERE id != {$_SESSION['user_id']}";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-            foreach ($result as $row) {
-                if($row['contact'] === $this->numero) {
-                    header('Location: ../views/editerUser.php?error:contactalredyexit');
-                    exit();
-                }
-
-                if($row['email'] === $this->email) {
-                    header('Location: ../views/editerUser.php?error:emailredyexit');
-                    exit();
-                }
-            }
-
             $sql = "UPDATE user SET name=?, contact=?, email=? WHERE id=?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$this->name, $this->numero, $this->email, $_SESSION['user_id']]);
