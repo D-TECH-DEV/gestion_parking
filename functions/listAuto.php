@@ -25,7 +25,8 @@
             $i++;
         }
         $_SESSION['table'] = $table;
-
+        $_SESSION['nbre_satatinées'] = count($result);
+        $_SESSION['nbre_librePlace'] = 23 - count($result);
    
 
     
