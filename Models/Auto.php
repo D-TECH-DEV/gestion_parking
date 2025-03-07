@@ -1,6 +1,8 @@
 <?php
     declare (strict_types=1);
-    require_once '../_config/config.php';
+
+    //require_once '../function.php';
+    //require_once '../_config/autoload.php';
     class Auto {
         //public Proprietaire $proprio;
         private string $proprietaire;
@@ -10,7 +12,7 @@
         private string $matricule;
         private string $station;
         //public Station $station;
-
+ 
         public function __construct ($proprietaire, $marque, $serie, $color, $matricule, $station) {
             $this->proprietaire = $proprietaire;
             $this->marque = $marque;
@@ -18,6 +20,10 @@
             $this->color = $color;
             $this->matricule = $matricule;
             $this->station = $station;
+        }
+
+        public function getMatricule () {
+            return $this->matricule;
         }
 
 
@@ -40,13 +46,14 @@
             $stmt = $conn->prepare($sql);
             $stmt->execute([$this->matricule]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            if($result) {
-                $sql = "UPDATE autos SET statut = 'Déstationnée' WHERE matricule = ?";
-                $stmt =  $conn->prepare($sql);
-                $stmt->execute([$this->matricule]);
-                $table = listStation ($conn);
-            }
-            header('Location: ../views/index.php');        
+            return $result;         
+        }
+
+        public static function listAuto($conn) {
+            $sql = "SELECT * FROM autos";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
 

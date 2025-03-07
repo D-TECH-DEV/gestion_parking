@@ -8,6 +8,7 @@
     require_once '../../_config/connexion.php';
 
 
+
     $user = new User('', '', $_POST['contact'], $_POST['password']);
     $result = $user->selectUser($conn); 
 
@@ -18,6 +19,7 @@
             $_SESSION['user_name'] = $result['name'];
             $_SESSION['user_contact'] = $result['contact'];
             $_SESSION['user_email'] = $result['email'];
+            require_once '../../functions/listAuto.php';
 
             header('Location: ../../views/index.php');
             exit();
@@ -28,6 +30,4 @@
     } else {
         header('Location: ../../views/login.html?error=invalid');
         exit();
-    } 
-
-       
+    }        

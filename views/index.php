@@ -4,16 +4,11 @@
 
   session_start();
 
-    //require '../controllers/function.php';
     
-    // if (!isset($_SESSION['user_id'])){
-    //   header ('Location: login.html');
-    // }
+    if (!isset($_SESSION['user_id'])){
+      header ('Location: login.html');
+    }
 
-    
-    // var_dump ($_SESSION['user_name']);
-    // die();
-    //require '../controllers/usersControllers/loginController.php';
 ?>
 
 <!doctype html>
@@ -140,7 +135,7 @@
                   <h5 class="card-title">Total Stationnée</h5>
                   <p class="card-text">
                   <?php
-                     echo $nbre;
+                     echo $_SESSION['nbre_satatinées'];
                   ?>
                   </p>
                 </div>
@@ -152,7 +147,7 @@
                   <h5 class="card-title">Places libres</h5>
                   <p class="card-text">
                   <?php
-                     echo 23-$nbre;
+                     echo $_SESSION['nbre_librePlace'];
                   ?>
                   </p>
                 </div>
@@ -262,7 +257,7 @@
     <div>
       <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-          <form action="../controllers/function.php" method="post" class="modal-content">
+          <form action="../controllers/autoControllers/destationerController.php" method="post" class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Déstationnement</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

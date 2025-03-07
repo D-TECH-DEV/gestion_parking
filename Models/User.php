@@ -41,7 +41,7 @@
             return $this->email;
         }
 
-    
+     
         public function insertUser($conn) {
             
             $sql = "INSERT INTO user(name, contact, email, password) VALUES (?, ?, ?, ?)";
@@ -58,8 +58,6 @@
             $stmt = $conn->prepare($sql);
             $stmt->execute([$this->numero]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            // var_dump($result);
-            // die(); 
            return $result; 
             
         }
@@ -84,3 +82,4 @@
         }
     }
 ?>
+ 
