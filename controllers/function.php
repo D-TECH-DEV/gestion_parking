@@ -13,10 +13,7 @@
     $nbre = getNbre($conn);
     
 
-    if (isset($_POST['submit-listAll'])){
-        $_SESSION['table'] = 'fkqsdjkfjklfjqdlfjdlfkj';//listStationAll($conn);
-        header('location: ..//listAll.php');
-    } 
+    
    
    
     if (isset($_POST['submit-staionnement'])) {

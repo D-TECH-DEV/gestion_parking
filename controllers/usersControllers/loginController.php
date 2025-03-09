@@ -19,13 +19,14 @@
             $_SESSION['user_name'] = $result['name'];
             $_SESSION['user_contact'] = $result['contact'];
             $_SESSION['user_email'] = $result['email'];
-            require_once '../../functions/listAuto.php';
+
+            Auto::listAuto($conn,  $_SESSION['nbre_satatinées']);
+           $_SESSION['nbre_librePlace'] = 23 - count($result);
 
             header('Location: ../../views/index.php');
             exit();
         }else {
             header('Location: ../../views/login.html?error:passordinvalid');
-
         }          
     } else {
         header('Location: ../../views/login.html?error=invalid');

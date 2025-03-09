@@ -1,4 +1,5 @@
  <?php
+    session_start();
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
@@ -15,25 +16,12 @@
         $sql = "UPDATE autos SET statut = 'Déstationnée' WHERE matricule = ?";
         $stmt =  $conn->prepare($sql);
         $stmt->execute([$auto->getMatricule()]);
-        $_SESSION['table'] = listStation ($conn, $auto->listAuto);
-        // var_dump($_SESSION['table']);
-        // die();
-    }
-    header('Location: ../../views/index.php'); 
 
-
-
-
-
-    //return count(getList($conn));
-
-
-
-
-
-
+        // mise à jour
+        $auto->listAuto($conn,  $_SESSION['nbre_satatinées']);
+        $_SESSION['nbre_librePlace'] = 23 - count($result);
         
+        header('Location: ../../views/index.php'); 
 
-    } 
-
+    }
 

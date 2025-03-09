@@ -27,18 +27,12 @@
         }
 
 
-        public function creatAuto ($conn) {
+        public function insertAuto ($conn) {
             $statut = 'Stationnée';
             $sql = 'INSERT INTO autos (proprio, marque, serie, couleur, matricule, statut) VALUES (?, ?, ?, ?, ?, ?)';
-            $stmt = $conn->prepare($sql); 
-           
-            if ($stmt) {            
-                $stmt->execute([$this->proprietaire, $this->marque, $this->serie, $this->color, $this->matricule, $statut]); 
-                $table = listStation ($conn);
-                header('Location: ../views/index.php');        
-            } else {
-                header('Location: ../views/index.php');            
-            }
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$this->proprietaire, $this->marque, $this->serie, $this->color, $this->matricule, $statut]);
+            return $stmt;       
         }
 
         public function destationAuto ($conn) {
@@ -49,14 +43,43 @@
             return $result;         
         }
 
-        public static function listAuto($conn) {
-            $sql = "SELECT * FROM autos";
+        public function selectAuto($conn) {
+            $sql = "SELECT * FROM autos ORDER BY id DESC";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-
-
-
+        public  function listAuto($conn, &$nbre) {
+                $result = $this->selectAuto($conn);
+                $i=1;
+                $nbre = 0;
+                $table ='';
+                foreach ($result as $row) {
+                    if($row['statut']=='Stationnée') {
+                        $statut = '<td class="text-success">'.$row['statut'].'</td>';
+                        $nbre += 1;
+                    } else {
+                        $statut = '<td class="text-danger">'.$row['statut'].'</td>';
+                    }
+                    $table .= '<tr>
+                                    <th scope="row">'.$i.'</th>
+                                    <td>'.$row['proprio'].'</td>
+                                    <td>'.$row['marque'].'</td>
+                                    <td>'.$row['serie'].'</td>
+                                    <td>'.$row['couleur'].'</td>
+                                    <td>'.$row['matricule'].'</td>
+                                    <td>'.$row['proprio'].'</td>'.
+                                    $statut.
+                                '</tr>';
+                    
+                    
+                    if ($i===5){
+                        $_SESSION['table_portion'] = $table;
+                    }
+                    $i++;
+                }
+                $_SESSION['table']= $table;
+                  
+        }
     }
