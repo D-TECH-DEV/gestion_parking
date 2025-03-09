@@ -94,7 +94,7 @@
     <div class="container-fluid ">
       <div class="row">
         
-        <div class="col-lg-4 ">
+        <div class="col-lg-3 mt-5">
           <div class="card shadow-sm">
             <div class="card-body text-center">
               <img src="../asset/images/img-prof.png" alt="Profile Image" class="img-fluid rounded-circle mb-3" style="width: 40%;">
@@ -119,82 +119,18 @@
         </div>
 
         
-        <div class="col-lg-8">
-          <div class="row">
-            <div class="col-md-6 col-lg-5 mb-3">
-              <div class="card shadow-sm h-100">
-                <div class="card-body">
-                  <h5 class="card-title">Total Station</h5>
-                  <p class="card-text">23</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-5 mb-3">
-              <div class="card shadow-sm h-100">
-                <div class="card-body">
-                  <h5 class="card-title">Total Stationnée</h5>
-                  <p class="card-text">
-                  <?php
-                     echo $_SESSION['nbre_satatinées'];
-                  ?>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-5 mb-3">
-              <div class="card shadow-sm h-100">
-                <div class="card-body">
-                  <h5 class="card-title">Places libres</h5>
-                  <p class="card-text">
-                  <?php
-                     echo $_SESSION['nbre_librePlace'];
-                  ?>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-5 mb-3">
-              <div class="card shadow-sm h-100">
-                <div class="card-body">
-                  <h5 class="card-title">Total journée</h5>
-                  <p class="card-text">102</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="col-lg-9 mt-5">
 
-          
-          <div class="table-container shadow-sm">
-            <table class="table table-hover table-bordered text-center">
-              <thead class="table-success">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Propriétaire</th>
-                  <th scope="col">Marque</th>
-                  <th scope="col">Série</th>
-                  <th scope="col">Couleur</th>
-                  <th scope="col">Matricule</th>
-                  <th scope="col">Position</th>
-                  <th scope="col">Statut</th>
-                </tr>
-              </thead>
-              <tbody id="tbody">
-              <?php
-                   echo $_SESSION['table'];
-                ?>
-              </tbody>
-            </table>
-          </div>
+        <!-- statistique -->
+        <?php include 'Index_part/statistic.php' ?>
+        
+          <!-- tabale -->
+          <?php include 'Index_part/table.php' ?>
+
           <div class="text-end">
-            <!-- <a href="listAll.php" name="submit-listAll" class="btn btn-outline-success" >
+            <a href="listAll.php" name="submit-listAll" class="btn btn-outline-success" >
               Afficher tout
-            </a> -->
-
-           <form action="../controllers/function.php" method="post">
-            <button  name="submit-listAll" class="btn btn-outline-success" >
-                Afficher touts
-              </button>
-           </form>
+            </a>
           </div>
         </div>
       </div>
@@ -202,110 +138,13 @@
 
 
       <!-- Modal de stationnement -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Stationnement</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-center">
-            <form method="post" action="../controllers/function.php" class="row g-3">
-              <div class="col-md-12">
-                <label for="validationDefault01" class="form-label">Propriétaire</label>
-                <input type="text" class="form-control" id="validationDefault01" name="propriétaire" required>
-              </div>
-              <div class="col-md-6">
-                <label for="validationDefault02" class="form-label">Marque</label>
-                <input type="text" class="form-control" id="validationDefault02" name="marque"  required>
-              </div>
-              <div class="col-md-6">
-                <label for="validationDefault02" class="form-label">Série</label>
-                <input type="text" class="form-control" id="validationDefault02" name="serie" required> 
-              </div>
-              <div class="col-md-5">
-                <label for="validationDefault03" class="form-label">Couleur</label>
-                <input type="text" class="form-control" id="validationDefault03" name="color" required>
-              </div>
-              <div class="col-md-5">
-                <label for="validationDefault05" class="form-label">Matricule</label>
-                <input type="text" class="form-control" id="validationDefault05" name="matricule" required>
-              </div>
-              <div class="col-md-4">
-                <label for="validationDefault04" class="form-label">Position</label>
-                <select class="form-select" id="validationDefault04" name="position" required>
-                  <option selected disabled value=""></option>
-                  <option>...</option>
-                </select>
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="submit-staionnement" class="btn btn-outline-success" >Valider</button>
-              </div>
-            </form>
-          </div>
-         
-        </div>
-      </div>
-    </div>
-   
-    
-
+      <?php include 'Index_part/stationnement_modal.php' ?>
 
       <!-- Modal de destationnement -->
-    <div>
-      <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <form action="../controllers/autoControllers/destationerController.php" method="post" class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Déstationnement</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div>
-                <label for="matr">Matricule</label>
-                <input type="text" id="matr" name="matr-dest" class="form-control">
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-outline-success" name="submit-déstation" type="submit">Déstationnés</button>
-            </div>
-          </form>
-        </div>
-      </div>
+      <?php include 'Index_part/destationnement_modal.php' ?>
     
-    </div>
-    
-    <div>
-      <div class="modal fade" id="chagepassword" aria-hidden="true" aria-labelledby="chagepasswordLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <form action="../controllers/function.php" method="post" class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="chagepasswordLabel">Changer mot de passe</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="mb-3">
-                <label for="oldpassword">Ancien mot de passe</label>
-                <input type="text" id="oldpassword" name="oldpassword" class="form-control">
-              </div>
-              <div class="mb-3">
-                <label for="newpassword">Nouveau mot de passe</label>
-                <input type="text" id="newpassword" name="newpassword" class="form-control">
-              </div>
-              <div class="mb-3">
-                <label for="newpassconfirm">Confirmer nouveau mot de passe</label>
-                <input type="text" id="newpassconfirm" name="newpassconfirm" class="form-control">
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-outline-success" name="submit-déstation" type="submit">Déstationnés</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+     <!-- Modal de destationnement -->
+     <?php include 'Index_part/changePWD_modal.php' ?>
     
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
