@@ -31,7 +31,7 @@
             <label for="validationDefault04" class="form-label">Position</label>
             <select class="form-select" id="validationDefault04" name="position" required>
                 <option selected disabled value=""></option>
-                <option>...</option>
+               <?php echo $_SESSION['station_libre'] ?>
             </select>
             </div>
             

@@ -43,15 +43,15 @@
             return $result;         
         }
 
-        public function selectAuto($conn) {
+        public static function selectAuto($conn) {
             $sql = "SELECT * FROM autos ORDER BY id DESC";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public  function listAuto($conn, &$nbre) {
-                $result = $this->selectAuto($conn);
+        public static function listAuto($conn, &$nbre) {
+                $result = self::selectAuto($conn);
                 $i=1;
                 $nbre = 0;
                 $table ='';

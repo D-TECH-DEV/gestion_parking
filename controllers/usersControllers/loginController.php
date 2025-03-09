@@ -22,6 +22,7 @@
 
             Auto::listAuto($conn,  $_SESSION['nbre_satatinées']);
            $_SESSION['nbre_librePlace'] = 23 - count($result);
+           require_once '../stationControllers/libreStatutController.php';
 
             header('Location: ../../views/index.php');
             exit();

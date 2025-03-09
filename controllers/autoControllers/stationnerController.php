@@ -14,7 +14,9 @@
     $stmt = $auto->insertAuto($conn);
 
     if ($stmt) {            
-        $auto->listAuto ($conn, $_SESSION['nbre_satatinées']);
+        $auto::listAuto ($conn, $_SESSION['nbre_satatinées']);
+        Station::updateStatutStation($conn, $_POST['position']);
+        require_once '../stationControllers/libreStatutController.php';
         header('Location: ../../views/index.php');        
     } else {
         header('Location: ../../views/index.php');            
