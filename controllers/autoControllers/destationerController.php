@@ -20,8 +20,8 @@
         // mise à jour
         $auto::listAuto($conn,  $_SESSION['nbre_satatinées']);
         $_SESSION['nbre_librePlace'] = 23 - count($result);
-        require_once '../stationControllers/libreStatutController.php';
-        header('Location: ../../views/index.php'); 
+        Station::updateStatutStation($conn, $_POST['position']);
+        require_once '../stationControllers/libreStatutController.php';        header('Location: ../../views/index.php'); 
 
     }
 
